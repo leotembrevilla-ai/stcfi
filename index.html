@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Teacher Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- School Header -->
+    <header style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+      <div style="display:flex; align-items:center;">
+        <!-- Replace logo.png with your actual logo file -->
+        <img src="stcfilogo.jpg" alt="School Logo" style="height:60px; margin-right:15px;" />
+        <h1 style="margin:0;">Southern Tech College Foundation Incorporated</h1>
+      </div>
+      <div>
+        <a href="/logout">Logout</a>
+      </div>
+    </header>
+
+    <h2>Teacher Dashboard</h2>
+
+    <section>
+      <h3>Add Student Record</h3>
+      <form id="addForm">
+        <input name="id" placeholder="Student ID (numeric)" required />
+        <input name="name" placeholder="Student Name" required />
+        <input name="subject" placeholder="Subject" required />
+        <input name="grade" placeholder="Grade (0-100)" required />
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section>
+      <h3>All Student Records</h3>
+      <table id="studentsTable">
+        <thead>
+          <tr>
+            <th>ID</th><th>Name</th><th>Subject</th><th>Grade</th><th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

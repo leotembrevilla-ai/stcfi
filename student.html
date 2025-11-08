@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Student View</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>View Your Grades</h1>
+    <form id="lookup">
+      <input id="studentId" placeholder="Enter your student ID (e.g. 1001)" required />
+      <button type="submit">View</button>
+    </form>
+    <div id="result" style="margin-top:18px"></div>
+  </div>
+
+  <script>
+    document.getElementById('lookup').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('studentId').value.trim();
+      if (!id) return;
+      const res = await fetch('/api/student/' + encodeURIComponent(id));
+      const out = document.getElementById('result');
+      out.innerHTML = '';
+      if (!res.ok) {
+        const err = await res.json().catch(()=>({error:'Not found'}));
+        out.innerHTML = '<p style="color:crimson;">' + (err.error || err.message || 'Student not found') + '</p>';
+        return;
+      }
+      const rows = await res.json();
+      let html = `<h3>${rows[0].name} (ID: ${rows[0].id})</h3><ul>`;
+      rows.forEach(r => {
+        html += `<li>${r.subject}: <strong>${r.grade}</strong></li>`;
+      });
+      html += '</ul>';
+      out.innerHTML = html;
+    });
+  </script>
+</body>
+</html>
