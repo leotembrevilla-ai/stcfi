@@ -1,0 +1,2 @@
+# stcfi
+Student Grade Portal
